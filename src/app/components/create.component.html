@@ -1,9 +1,13 @@
 <h2>New Todo</h2>
 
 <div>
-    <app-todo></app-todo>
+    <!-- template reference -->
+    <app-todo #myTodo></app-todo>
 </div>
 <br>
+<hr>
 <div>
     <button type="button" [routerLink]="['/']">Back</button>
+    &nbsp;|&nbsp;
+    <button type="button" (click)="addTodo()">Add Todo</button>
 </div>

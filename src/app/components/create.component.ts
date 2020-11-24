@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { TodoComponent } from './todo.component';
 
 @Component({
   selector: 'app-create',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
+  @ViewChild('myTodo')
+  todoRef: TodoComponent;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addTodo(): void {
+    console.info('=> addTodo: ', this.todoRef.todo);
+    this.todoRef.addTask();
   }
 
 }

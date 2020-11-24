@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from "@angular/forms";
 
+import { Todo } from '../models';
+
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -10,6 +12,15 @@ export class TodoComponent implements OnInit {
 
   todoForm: FormGroup;
   tasksArray: FormArray;
+  
+  // getter-setter methods: when used TOGETHER, they are treated as an attribute and can be referenced directly
+  get todo(): Todo {
+    return this.todoForm.value as Todo;
+  }
+
+  set todo(t: Todo) {
+    // implement later
+  }
 
   constructor(private fb: FormBuilder) { }
 
