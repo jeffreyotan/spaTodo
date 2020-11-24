@@ -1,0 +1,33 @@
+<form [formGroup]="todoForm">
+    <div><strong>Title</strong></div>
+    <div>
+        <input type="text" formControlName="title" placeholder="Please enter title" size="40">
+        <button type="button" (click)="addTask()">Add Task</button>
+        &nbsp;|&nbsp;
+        <button type="button" (click)="showTasks()">Show Tasks</button>
+    </div>
+    <table>
+        <thead>
+            <th>Description</th>
+            <th>Priority</th>
+            <th></th>
+        </thead>
+        <tbody formArrayName="tasks">
+            <tr *ngFor="let t of tasksArray.controls; let i = index" [formGroup]="t">
+                <td>
+                    <input type="text" formControlName="description" placeholder="Sub-task description" size="40">
+                </td>
+                <td>
+                    <select name="priority" id="priority" formControlName="priority">
+                        <option value="0">Low</option>
+                        <option value="1">Medium</option>
+                        <option value="2">High</option>
+                    </select>
+                </td>
+                <td>
+                    <button type="button" (click)="deleteTask(i)">X</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
