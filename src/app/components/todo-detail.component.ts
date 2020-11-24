@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TodoComponent } from './todo.component';
+import { TodoDatabase } from '../todo.database';
 
 @Component({
   selector: 'app-todo-detail',
@@ -8,12 +10,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TodoDetailComponent implements OnInit {
 
+  @ViewChild('myTodo')
+  todoRef: TodoComponent;
+
   todoId: string = '';
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute, private todoDB: TodoDatabase) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.todoId = this.activatedRoute.snapshot.params['todoId'];
+
+    const todo = await this.todoDB.getTodoDetail(this.todoId);
+    this.todoRef.todo = todo;
   }
 
 }

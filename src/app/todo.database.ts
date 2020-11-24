@@ -21,7 +21,8 @@ export class TodoDatabase extends Dexie {
     }
 
     async addTodo(t: Todo): Promise<any> {
-        return await this.todo.put(t); // this is an upsert method (it will update if the primary key is already there, but insert if the primary key is not there)
+        // this is an upsert method (it will update if the primary key is already there, but insert if the primary key is not there)
+        return await this.todo.put(t);
 
         // Alternatively.. using an insert method
         // this.todo.add(t);
@@ -34,6 +35,10 @@ export class TodoDatabase extends Dexie {
                 title: d.title
             } as TodoSummary;
         });
+    }
+
+    async getTodoDetail(id: string): Promise<Todo> {
+        return (await this.todo.get(id)) as Todo;
     }
 
 }

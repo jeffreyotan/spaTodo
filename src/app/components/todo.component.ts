@@ -25,7 +25,10 @@ export class TodoComponent implements OnInit {
   }
 
   set todo(t: Todo) {
-    // implement later
+    // console.info('=> Setter todo: ', t);
+    this.todoForm = this.createFormWithTodo(t);
+    this.tasksArray = this.todoForm.get('tasks') as FormArray;
+    // console.info('=> Setter tasksArray: ', this.tasksArray);
   }
 
   constructor(private fb: FormBuilder) { }
@@ -50,6 +53,23 @@ export class TodoComponent implements OnInit {
     //   title: this.fb.control('', [ Validators.required ]),
     //   tasks: this.tasksArray
     // });
+  }
+
+  private createFormWithTodo(todo: Todo): FormGroup {
+    const newArray = [];
+    todo.tasks.forEach(element => {
+      newArray.push({
+        description: this.fb.control(`${element.description}`, [ Validators.required ]),
+        priority: this.fb.control(`${element.priority}`, [ Validators.required ])
+      });
+    });
+    console.info('=> newArray: ', newArray);
+
+    return this.fb.group({
+      id: this.fb.control(`${todo.id}`, [ Validators.required ]),
+      title: this.fb.control(`${todo.title}`, [ Validators.required ]),
+      tasks: this.fb.array(newArray)
+    });
   }
 
   private createTask(): FormGroup {
