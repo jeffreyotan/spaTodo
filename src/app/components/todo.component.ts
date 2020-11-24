@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from "@angular/forms";
 
 import { Todo } from '../models';
@@ -14,8 +14,14 @@ export class TodoComponent implements OnInit {
   tasksArray: FormArray;
   
   // getter-setter methods: when used TOGETHER, they are treated as an attribute and can be referenced directly
+  @Input()
   get todo(): Todo {
-    return this.todoForm.value as Todo;
+    const t: Todo = this.todoForm.value as Todo;
+    // t.tasks = t.tasks.map(v => {
+    //   v.priority = parseInt(v.priority);
+    //   return v;
+    // });
+    return t;
   }
 
   set todo(t: Todo) {

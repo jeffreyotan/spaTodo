@@ -7,11 +7,14 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './components/main.component';
 import { CreateComponent } from './components/create.component';
 import { TodoComponent } from './components/todo.component';
+import { TodoDatabase } from './todo.database';
+import { TodoDetailComponent } from './components/todo-detail.component';
 
 const ROUTES: Routes = [
   { path: '', component: MainComponent },
   { path: 'home', component: MainComponent },
   { path: 'create', component: CreateComponent },
+  { path: 'todo/:todoId', component: TodoDetailComponent },
   { path: '**', redirectTo: '/', pathMatch: "full" }
 ];
 
@@ -20,7 +23,8 @@ const ROUTES: Routes = [
     AppComponent,
     MainComponent,
     CreateComponent,
-    TodoComponent
+    TodoComponent,
+    TodoDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,9 @@ const ROUTES: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    TodoDatabase
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
