@@ -9,6 +9,6 @@
 <div>
     <button type="button" [routerLink]="['/']">Back</button>
     &nbsp;|&nbsp;
-    <button type="button">Update</button>
-    <button type="button">Delete</button>
+    <button type="button" (click)="onUpdate()">Update</button>
+    <button type="button" (click)="onDelete()">Delete</button>
 </div>

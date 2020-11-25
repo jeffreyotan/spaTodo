@@ -41,4 +41,8 @@ export class TodoDatabase extends Dexie {
         return (await this.todo.get(id)) as Todo;
     }
 
+    async deleteTodo(id: string): Promise<any> {
+        return await this.todo.where('id').equals(id).delete();
+    }
+
 }

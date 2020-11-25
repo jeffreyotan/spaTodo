@@ -58,10 +58,10 @@ export class TodoComponent implements OnInit {
   private createFormWithTodo(todo: Todo): FormGroup {
     const newArray = [];
     todo.tasks.forEach(element => {
-      newArray.push({
+      newArray.push(this.fb.group({ // always remember that a FormArray accepts FormGroup and not any object
         description: this.fb.control(`${element.description}`, [ Validators.required ]),
         priority: this.fb.control(`${element.priority}`, [ Validators.required ])
-      });
+      }));
     });
     console.info('=> newArray: ', newArray);
 
